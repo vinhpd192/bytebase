@@ -11,7 +11,6 @@ func TestGenerateLicense(t *testing.T) {
 	print("Test license")
 
 	token := jwt.NewWithClaims(jwt.SigningMethodRS256, jwt.MapClaims{
-		"kid":           "v1",
 		"iss":           "bytebase",
 		"aud":           "bb.license",
 		"mod":           "prod",
@@ -20,10 +19,12 @@ func TestGenerateLicense(t *testing.T) {
 		"trialing":      false,
 		"plan":          "ENTERPRISE",
 		"orgName":       "bb",
-		"workspaceId":   "",
+		"workspaceId":   "c99c08a2-2bf7-4e10-9d1e-5e9437feccfe",
 		"exp":           time.Now().Add(time.Hour * 24 * 365 * 10).Unix(),
 		"iat":           time.Now().Unix(),
 	})
+
+	token.Header["kid"] = "v1"
 
 	key := `-----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDARPQtLB6iIdy2
