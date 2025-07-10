@@ -1,0 +1,33 @@
+kid == expectVersion == v1
+issuer == bytebase
+aud == bb.license
+mode == prod
+sub ==
+
+
+
+type claims struct {
+	ActiveInstances int    `json:"instanceCount"`
+	Instances       int    `json:"instance"`
+	Seats           int    `json:"seat"`
+	Trialing        bool   `json:"trialing"`
+	Plan            string `json:"plan"`
+	OrgName         string `json:"orgName"`
+	WorkspaceID     string `json:"workspaceId"`
+	jwt.RegisteredClaims
+}
+
+const (
+	PlanType_PLAN_TYPE_UNSPECIFIED PlanType = 0
+	PlanType_FREE                  PlanType = 1
+	PlanType_TEAM                  PlanType = 2
+	PlanType_ENTERPRISE            PlanType = 3
+)
+// ENTERPRISE
+// GetWorkspaceID finds the workspace id in setting bb.workspace.id.
+
+docker run --rm --init \
+  --name bytebase \
+  --publish 8080:8080 \
+  --volume ~/.bytebase/data:/var/opt/bytebase \
+  bytebase/bytebase-action:3.8.0
