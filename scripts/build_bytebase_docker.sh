@@ -12,7 +12,8 @@ cd "$(dirname "$0")/../"
 
 echo "Start building Bytebase docker image ${VERSION}..."
 
-docker build -f ./scripts/Dockerfile \
+docker build --platform linux/amd64 \
+    -f ./scripts/Dockerfile \
     --build-arg VERSION="${VERSION}" \
     --build-arg GIT_COMMIT="${GIT_COMMIT}"\
     -t bytebase/bytebase .
